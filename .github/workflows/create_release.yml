@@ -26,6 +26,7 @@ jobs:
       - name: run lerna-changelog
         id: run_changelog
         run: |
+          yarn run lerna-changelog
           changelog=`yarn run lerna-changelog`
           echo "$changelog"
           echo "::set-output name=changelog::${changelog//$'\n'/\\n}";
