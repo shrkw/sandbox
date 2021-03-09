@@ -1,19 +1,14 @@
-# This is a basic workflow that is manually triggered
-
 name: Create release tag
 
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
     inputs:
       bumping_part:
-        # Friendly description to be shown in the UI instead of 'name'
         description: 'major, minor or patch'
-        # Default value if no value is explicitly provided
         default: 'minor'
-        # Input has to be provided for the workflow to run
         required: true
-
+env:
+  GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   changelog:
     runs-on: ubuntu-latest
@@ -28,7 +23,7 @@ jobs:
         run: |
           changelog=`yarn run lerna-changelog`
           echo "$changelog"
-          echo "::set-output name=changelog::${changelog//$'\n'/\\n}";
+          echo "::set-output name=changelog::${changelog}";
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.2
