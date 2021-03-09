@@ -26,7 +26,7 @@ jobs:
           echo "::set-output name=changelog::${changelog//$'\n'/'%0A'}";
       - name: Bump version and push tag
         id: tag_version
-        uses: mathieudutour/github-tag-action@v5.2
+        uses: mathieudutour/github-tag-action@v5.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: ${{ github.event.inputs.bumping_part }}
