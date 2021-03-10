@@ -21,8 +21,8 @@ jobs:
       - name: run lerna-changelog
         id: run_changelog
         run: |
-          changelog=`yarn run lerna-changelog`
-          echo "$changelog"
+          yarn run lerna-changelog | tee /tmp/changelog.txt
+          changelog=$(cat /tmp/changelog.txt)
           echo "::set-output name=changelog::${changelog//$'\n'/'%0A'}";
       - name: Bump version and push tag
         id: tag_version
