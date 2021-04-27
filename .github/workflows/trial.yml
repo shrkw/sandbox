@@ -32,5 +32,7 @@ jobs:
       - name: call curl
         run: |
           curl -H "content-type: application/json" \
-          -X POST -d{\"asa_gohan\":\"${GITHUB_SERVER_URL}/abc\", \"oyatsu\":\"${GITHUB_REPOSITORY}\"} \
-          http://httpbin.org/post
+          -X POST -d @- \
+          http://httpbin.org/post << EOS
+          {"value1":"＄{GITHUB_SERVER_URL}/aaaa","value2":"${GITHUB_REPOSITORY}","value3":"aaa"}
+          EOS
