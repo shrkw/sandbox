@@ -7,8 +7,6 @@ on:
         description: 'major, minor or patch'
         default: 'minor'
         required: true
-env:
-  GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   create_release_tag:
     runs-on: ubuntu-latest
@@ -20,6 +18,8 @@ jobs:
         run: yarn install
       - name: run lerna-changelog
         id: run_changelog
+        env:
+          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn run lerna-changelog | tee /tmp/changelog.txt
           changelog=$(cat /tmp/changelog.txt)
