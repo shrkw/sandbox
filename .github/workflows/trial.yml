@@ -30,9 +30,11 @@ jobs:
           echo test, and deploy your project.
 
       - name: call curl
+        env:
+          HOGEHOGE: env_var_hoge
         run: |
           curl -H "content-type: application/json" \
           -X POST -d @- \
           http://httpbin.org/post << EOS
-          {"value1":"${GITHUB_SERVER_URL}/aaaa","value2":"${GITHUB_REPOSITORY}","value3":"aaa"}
+          {"value1":"${GITHUB_SERVER_URL}/aaaa","value2":"${GITHUB_REPOSITORY}","value3":"${HOGEHOGE}"}
           EOS
