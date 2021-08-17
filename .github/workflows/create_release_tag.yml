@@ -1,6 +1,9 @@
 name: Create release tag
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
     inputs:
       bumping_part:
